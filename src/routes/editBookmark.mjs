@@ -15,6 +15,10 @@ editBookmarkRouter.patch("/",
     const bodyErrors = validationResult(request)
     const errors = []
 
+
+
+
+
     const bookmarkQuery = 'update bookmarks set title = ?, url = ?, description = ? where id = ?'
     const deleteTagQuery = 'delete from bookmark_tag where bookmark_id = ?'
     const tagquery = `insert into bookmark_tag(bookmark_id,tag_id) values ?`

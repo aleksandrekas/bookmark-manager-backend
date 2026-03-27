@@ -10,6 +10,10 @@ import refreshRouter from "./routes/refresh.mjs";
 import example from "./routes/test.mjs";
 import addBookmarkRouter from "./routes/addBookmark.mjs";
 import editBookmarkRouter from "./routes/editBookmark.mjs";
+import archiveRoute from "./routes/archive.mjs";
+import editRouter from "./routes/edit.mjs";
+import deleteRouter from "./routes/delete.mjs";
+
 
 dotenv.config()
 
@@ -49,7 +53,9 @@ app.use("/api/example",example)
 app.use("/api/addBookmark",addBookmarkRouter)
 app.use("/api/test",example)
 app.use("/api/editBookmark",editBookmarkRouter)
-
+app.use("/api/archive",archiveRoute)
+app.use("/api/edit",editRouter)
+app.use("/api/delete",deleteRouter)
 
 
 
