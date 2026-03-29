@@ -16,14 +16,19 @@ editRouter.patch('/',(request,response)=>{
     }
 
 
+    const { id, ...fields } = request.body
 
-    const keys = Object.keys(request.body.params)
-    const values = Object.values(request.body.params)
 
-    const args = keys.map((item,index)=>(`${item} = ${values[index]}`))
+
+    const keys = Object.keys(fields)
+    const values = Object.values(fields)
+
+    const args = keys.map(key => `${key} = ?`).join(', ');
     const editQuery = `update bookmarks set ${args} where id = ?`
-    
-    database.query(editQuery,[request.body.id],(error,result)=>{
+
+
+
+    database.query(editQuery,[...values,id],(error,result)=>{
         if(error){
             return response.json({error:error})
         }
