@@ -7,6 +7,14 @@ const getBookmarks = Router()
 
 
 
+function getIcon(url){
+    const domain = new URL(url).hostname;
+    const icon = `https://www.google.com/s2/favicons?domain=${domain}&sz=64`;
+    return icon
+}
+
+
+
 getBookmarks.get("/",(request,response)=>{
     const tokenString  = request.headers.authorization;
     const token = tokenString.split(" ")[1]
@@ -22,7 +30,8 @@ getBookmarks.get("/",(request,response)=>{
         b.created,
         b.visitCount,
         b.lastVisit,
-        b.userId, 
+        b.userId,
+        b.pinned, 
         json_arrayagg(t.name) as tags 
         from bookmarks b 
         left join bookmark_tag bt on b.id = bt.bookmark_id
@@ -41,11 +50,17 @@ getBookmarks.get("/",(request,response)=>{
                 if(err){
                     return response.status(500).json({message:"database query error at bookmarks"})
                 }
+
+                const bookmarks = res.map((item)=>({
+                    ...item,
+                    icon:getIcon(item.url)
+                }))
+
                 response.json({
                     userId:id,
                     userName:name,
                     userEmail:email,
-                    res
+                    res:bookmarks
                 })
             })
 

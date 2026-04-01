@@ -26,7 +26,7 @@ addBookmarkRouter.post("/",
         }
         return response.send(errors)
     }
-    const {title,url,description,selectedtags,archived,created,visitCount,lastVisit} = request.body
+    const {title,url,description,selectedtags,archived,created,visitCount,lastVisit,pinned} = request.body
     const token = request.headers.authorization.split(" ")[1]
     const decoded = jwt.verify(token,process.env.JWT_SECRET)
 
@@ -61,13 +61,13 @@ addBookmarkRouter.post("/",
 
 
 
-    const bookmarkquery = `insert into bookmarks(title,url,description,userId,archived,created,visitCount,lastVisit) values(?,?,?,?,?,?,?,?)`
+    const bookmarkquery = `insert into bookmarks(title,url,description,userId,archived,created,visitCount,lastVisit,pinned) values(?,?,?,?,?,?,?,?,?)`
     const tagquery = `insert into bookmark_tag(bookmark_id,tag_id) values ?`
 
 
 
 
-    database.query(bookmarkquery,[title,url,description,decoded.id,archived,created,visitCount,lastVisit],async (error,result)=>{
+    database.query(bookmarkquery,[title,url,description,decoded.id,archived,created,visitCount,lastVisit,pinned],async (error,result)=>{
         if(error){
             console.log(error)
             return response.json({message:"database error"})
