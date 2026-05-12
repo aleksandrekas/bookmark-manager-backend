@@ -70,7 +70,7 @@ addBookmarkRouter.post("/",
     database.query(bookmarkquery,[title,url,description,decoded.id,archived,created,visitCount,lastVisit,pinned],async (error,result)=>{
         if(error){
             console.log(error)
-            return response.json({message:"database error"})
+            return response.status(500).json({error:"database error"})
         }
         if(result){
             const bookmarkId = result.insertId;
@@ -79,7 +79,7 @@ addBookmarkRouter.post("/",
             console.log(junctionTableValues)
             database.query(tagquery,[junctionTableValues],(err,res)=>{
                 if(err){
-                    return response.json({message:err})
+                    return response.status(500).json({error:"database error"})
                 }
                 if(res){
                     return response.status(201).json({message:"created"})

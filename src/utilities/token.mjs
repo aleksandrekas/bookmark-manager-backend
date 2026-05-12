@@ -14,28 +14,13 @@ export function generateToken(user){
         },
         process.env.JWT_SECRET,
         {
-            expiresIn:"30m"
+            expiresIn:"10h"
         }
     )
 }
 
 
-export function generateRefreshToken(user){
-    if(!process.env.REF_SECRET){
-        throw new Error('secret is not defined')
-    }
-    return jwt.sign({
-            id:user.id,
-            name:user.name,
-            email:user.email,
-            tokenId:crypto.randomUUID()
-        },
-        process.env.REF_SECRET,
-        {
-            expiresIn:"2d"
-        }
-    )
-}
+
 
 
 

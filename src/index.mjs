@@ -6,8 +6,6 @@ import cors from "cors";
 import dotenv from "dotenv"
 import cookieParser from "cookie-parser";
 import getBookmarks from "./routes/getBookmarks.mjs";
-import refreshRouter from "./routes/refresh.mjs";
-import example from "./routes/test.mjs";
 import addBookmarkRouter from "./routes/addBookmark.mjs";
 import editBookmarkRouter from "./routes/editBookmark.mjs";
 import archiveRoute from "./routes/archive.mjs";
@@ -37,21 +35,19 @@ app.use(cors({
 
 
 
+
 database.connect((err)=>{
     if(err){
         console.log(err)
     }else{
-        console.log('ggs nice work')
+        // console.log('ggs nice work')
     }
 })
 
 app.use("/api/sign", signRouter)
 app.use("/api/login", loginRouter)
 app.use("/api/bookmarks", getBookmarks)
-app.use("/api/refresh", refreshRouter)
-app.use("/api/example",example)
 app.use("/api/addBookmark",addBookmarkRouter)
-app.use("/api/test",example)
 app.use("/api/editBookmark",editBookmarkRouter)
 app.use("/api/archive",archiveRoute)
 app.use("/api/edit",editRouter)
@@ -61,5 +57,5 @@ app.use("/api/delete",deleteRouter)
 
 
 app.listen(port,()=>{
-    console.log(`runing on ${port}`)
+    // console.log(`runing on ${port}`)
 })

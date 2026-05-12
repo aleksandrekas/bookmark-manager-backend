@@ -67,9 +67,9 @@ getBookmarks.get("/",(request,response)=>{
         })
     }catch(err){
         if(err.name === 'TokenExpiredError'){
-            return response.status(401).json("token expired")
+            return response.status(401).json({error:"token expired"})
         }else{
-            return response.status(401).json("invalid token")   
+            return response.status(402).json({error:"invalid token"})   
         }
     }
 })
