@@ -25,7 +25,7 @@ app.use(cookieParser())
 
 
 app.use(cors({
-  origin: 'https://bookmark-magaer-app.vercel.app/',
+  origin: 'https://bookmark-magaer-app.vercel.app',
   methods: ['GET', 'POST', 'PUT', 'DELETE','PATCH'],
   credentials: true
 }));
