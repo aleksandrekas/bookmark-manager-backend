@@ -1,11 +1,11 @@
-import mysql from "mysql2";
+import pg, { Connection } from "pg";
 
 
+const {Pool} = pg
 
-
-export const database = mysql.createConnection({
-    host:'db.qwqmhfywgttvhlkbxvhx.supabase.co',
-    user:'postgres',
-    password:'CswkSaFa3T2zNi6E',
-    database:'postgres'
+export const database = new Pool({
+    ConnectionString:`//postgres:${process.env.DB_PASS}@db.qwqmhfywgttvhlkbxvhx.supabase.co:5432/postgres`,
+    ssl:{
+        rejectUnauthorized:false
+    }
 })
